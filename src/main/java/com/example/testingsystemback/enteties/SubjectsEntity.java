@@ -15,12 +15,10 @@ public class SubjectsEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // Один преподаватель у предмета
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private UsersEntity teacher;
 
-    // Много студентов — через таблицу subject_student
     @OneToMany(mappedBy = "subject")
     private List<SubjectStudentEntity> students;
 
