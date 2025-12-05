@@ -1,4 +1,4 @@
-package com.example.testingsystemback;
+package com.example.testingsystemback.enteties;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.example.testingsystemback;
+package com.example.testingsystemback.enteties;
 
 import jakarta.persistence.*;
 
