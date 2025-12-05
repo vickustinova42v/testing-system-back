@@ -53,3 +53,9 @@ create table student_test (
     student_id integer references users (id) not null,
     test_id integer references tests (id) not null
 );
+
+create table subject_student (
+    id serial primary key,
+    subject_id integer references subjects(id) not null,
+    student_id integer references users(id) not null
+);

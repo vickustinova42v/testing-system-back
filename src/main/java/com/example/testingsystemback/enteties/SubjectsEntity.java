@@ -1,10 +1,12 @@
 package com.example.testingsystemback.enteties;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "subjects")
 public class SubjectsEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -13,27 +15,25 @@ public class SubjectsEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    // Один преподаватель у предмета
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
     private UsersEntity teacher;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id")
-    private UsersEntity student;
+    // Много студентов — через таблицу subject_student
+    @OneToMany(mappedBy = "subject")
+    private List<SubjectStudentEntity> students;
 
-    public SubjectsEntity() {
-    }
+    public SubjectsEntity() {}
 
     public SubjectsEntity(
-        Long id,
-        String name,
-        UsersEntity teacher,
-        UsersEntity student
+            Long id,
+            String name,
+            UsersEntity teacher
     ) {
         this.id = id;
         this.name = name;
         this.teacher = teacher;
-        this.student = student;
     }
 
     public Long getId() {
@@ -60,11 +60,11 @@ public class SubjectsEntity {
         this.teacher = teacher;
     }
 
-    public UsersEntity getStudent() {
-        return student;
+    public List<SubjectStudentEntity> getStudents() {
+        return students;
     }
 
-    public void setStudent(UsersEntity student) {
-        this.student = student;
+    public void setStudents(List<SubjectStudentEntity> students) {
+        this.students = students;
     }
 }
