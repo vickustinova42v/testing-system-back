@@ -1,4 +1,7 @@
 package com.example.testingsystemback.repositories;
 
-public class RolesRepository {
+import com.example.testingsystemback.enteties.RolesEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RolesRepository extends JpaRepository<RolesEntity, Long> {
 }
