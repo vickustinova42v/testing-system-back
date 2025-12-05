@@ -50,4 +50,9 @@ public class UsersService {
         user.setPassword(newPassword);
         return usersRepository.save(user);
     }
+
+    public UsersEntity getUserById(Long id) {
+        return usersRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+    }
 }

@@ -3,7 +3,6 @@ package com.example.testingsystemback.services;
 import com.example.testingsystemback.enteties.RolesEntity;
 import com.example.testingsystemback.repositories.RolesRepository;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class RolesService {
@@ -14,12 +13,17 @@ public class RolesService {
         this.rolesRepository = rolesRepository;
     }
 
-    public List<RolesEntity> getAllRoles() {
-        return rolesRepository.findAll();
-    }
-
     public RolesEntity getRoleById(Long id) {
         return rolesRepository.findById(id)
-                .orElse(null); // можно кинуть ошибку, если хочешь
+                .orElseThrow(() -> new RuntimeException("Роль не найдена"));
+    }
+
+    public RolesEntity getRoleByName(String name) {
+        return rolesRepository.findByName(name)
+                .orElseThrow(() -> new RuntimeException("Роль не найдена"));
+    }
+
+    public java.util.List<RolesEntity> getAllRoles() {
+        return rolesRepository.findAll();
     }
 }
