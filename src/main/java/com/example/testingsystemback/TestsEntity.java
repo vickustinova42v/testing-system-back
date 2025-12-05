@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "tests")
 public class TestsEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,7 +16,6 @@ public class TestsEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // subject_id → subjects.id (NOT NULL)
     @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false)
     private SubjectsEntity subject;
@@ -25,10 +23,12 @@ public class TestsEntity {
     public TestsEntity() {
     }
 
-    public TestsEntity(Long id,
-                       Integer time,
-                       String name,
-                       SubjectsEntity subject) {
+    public TestsEntity(
+        Long id,
+        Integer time,
+        String name,
+        SubjectsEntity subject
+    ) {
         this.id = id;
         this.time = time;
         this.name = name;

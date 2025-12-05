@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "answers")
 public class AnswersEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,7 +16,6 @@ public class AnswersEntity {
     @Column(name = "is_right_answer", nullable = false)
     private Boolean isRightAnswer;
 
-    // question_id → questions.id (NOT NULL)
     @ManyToOne
     @JoinColumn(name = "question_id", referencedColumnName = "id", nullable = false)
     private QuestionsEntity question;

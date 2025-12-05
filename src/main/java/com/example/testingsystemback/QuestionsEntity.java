@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "questions")
 public class QuestionsEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -17,7 +16,6 @@ public class QuestionsEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    // subject_id → subjects.id (NOT NULL)
     @ManyToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id", nullable = false)
     private SubjectsEntity subject;
