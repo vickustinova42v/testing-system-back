@@ -10,13 +10,16 @@ public class RolesEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 
     public RolesEntity() {
     }
 
-    public RolesEntity(Long id, String name) {
+    public RolesEntity(
+        Long id,
+        String name
+    ) {
         this.id = id;
         this.name = name;
     }
