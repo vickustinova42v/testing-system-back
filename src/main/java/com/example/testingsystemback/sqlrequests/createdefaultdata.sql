@@ -4,13 +4,16 @@ insert into roles (name) values
                              ('Студент');
 
 insert into users (last_name, first_name, fathers_name, email, password, role_id) values
-    ('Админов', 'Админ', 'Админович','ivan@ivan.ru', 'admin', 1);
+    ('Админов', 'Админ', 'Админович','ivan@ivan.ru',
+     '$2b$12$woiMG2qIeijoeEMduhZ4/.d4SyxViILEUp5oJDuZ3OPZ0yHPLFwES', 1);
 
 insert into users (last_name, first_name, fathers_name, email, password, role_id) values
-    ('Иванов', 'Иван', 'Иванович', 'teacher@test.com', '12345', 2);
+    ('Иванов', 'Иван', 'Иванович', 'teacher@test.com',
+     '$2b$12$aXYfHRjxsYZkjQ65f4k.kOrM1RuCZUDAWw3PWfqtth3TfBOUBK0V2', 2);
 
 insert into users (last_name, first_name, fathers_name, email, password, role_id) values
-    ('Петрова', 'Анна', 'Сергеевна', 'student@test.com', '12345', 3);
+    ('Петрова', 'Анна', 'Сергеевна', 'student@test.com',
+     '$2b$12$fbvbx3hlRY3I9EqMEWNaF.s.sIv7MqCvUQb30O/MUKKX/.E31csxm', 3);
 
 insert into subjects (name, teacher_id) values
                                             ('Математика', 2),
