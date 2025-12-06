@@ -1,7 +1,8 @@
 insert into roles (name) values
                              ('Администратор'),
                              ('Преподаватель'),
-                             ('Студент');
+                             ('Студент'),
+                             ('Гость');
 
 insert into users (last_name, first_name, fathers_name, email, password, role_id) values
     ('Админов', 'Админ', 'Админович','ivan@ivan.ru',
