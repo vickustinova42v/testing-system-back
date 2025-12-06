@@ -157,3 +157,16 @@ insert into test_question (test_id, question_id) values
 
 insert into test_question (test_id, question_id) values
                                                      (3,15),(3,16),(3,17),(3,18),(3,19),(3,20);
+
+INSERT INTO users (first_name, last_name, fathers_name, email, password, role_id)
+VALUES
+    ('Ivan', 'Petrov', 'Sergeevich', 'teacher2@example.com',
+     '$2a$10$0GJPD7Wv/MManIeZDV4SSuYcyJMccwVnZq70MkUj7JHwI6snvqOdi', 2),
+
+    ('Olga', 'Sidorova', 'Nikolaevna', 'student2@example.com',
+     '$2a$10$0GJPD7Wv/MManIeZDV4SSuYcyJMccwVnZq70MkUj7JHwI6snvqOdi', 3),
+
+    ('Pavel', 'Ivanov', 'Olegovich', 'admin2@example.com',
+     '$2a$10$0GJPD7Wv/MManIeZDV4SSuYcyJMccwVnZq70MkUj7JHwI6snvqOdi', 1);
+
+
