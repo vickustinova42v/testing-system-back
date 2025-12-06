@@ -5,6 +5,7 @@ import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.UsersRepository;
 import com.example.testingsystemback.repositories.RolesRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
@@ -54,5 +55,12 @@ public class UsersService {
     public UsersEntity getUserById(Long id) {
         return usersRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+    }
+
+    public String getUserRoleName(Long id) {
+        UsersEntity user = usersRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
+
+        return user.getRole().getName();
     }
 }
