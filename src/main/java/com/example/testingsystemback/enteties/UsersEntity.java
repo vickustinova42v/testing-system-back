@@ -29,7 +29,7 @@ public class UsersEntity {
     private String password;
 
     @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private RolesEntity role;
 
     // Предметы, где пользователь является преподавателем

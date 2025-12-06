@@ -3,6 +3,7 @@ package com.example.testingsystemback.services;
 import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.UsersRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,9 +18,11 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-    public AuthService(UsersRepository usersRepository,
-                       PasswordEncoder passwordEncoder,
-                       AuthenticationManager authenticationManager) {
+    public AuthService(
+            UsersRepository usersRepository,
+            PasswordEncoder passwordEncoder,
+            AuthenticationManager authenticationManager
+    ) {
         this.usersRepository = usersRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
@@ -32,6 +35,7 @@ public class AuthService {
         }
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         return usersRepository.save(user);
     }
 
@@ -43,14 +47,17 @@ public class AuthService {
 
         SecurityContextHolder.getContext().setAuthentication(auth);
 
-        request.getSession(true); // создаёт сессию
+        HttpSession session = request.getSession(true);
+        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
-        return usersRepository.findByEmail(email).get();
+        return usersRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found after login"));
     }
 
     public void logout(HttpServletRequest request) {
-        request.getSession().invalidate();
+        HttpSession session = request.getSession(false);
+        if (session != null) session.invalidate();
+
         SecurityContextHolder.clearContext();
     }
 }
-
