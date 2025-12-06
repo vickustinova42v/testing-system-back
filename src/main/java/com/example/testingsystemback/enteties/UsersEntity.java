@@ -1,5 +1,6 @@
 package com.example.testingsystemback.enteties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -33,10 +34,12 @@ public class UsersEntity {
 
     // Предметы, где пользователь является преподавателем
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<SubjectsEntity> subjectsAsTeacher;
 
     // Предметы, где пользователь студент (через таблицу subject_student)
     @OneToMany(mappedBy = "student")
+    @JsonIgnore
     private List<SubjectStudentEntity> subjectsAsStudent;
 
     public UsersEntity() {}

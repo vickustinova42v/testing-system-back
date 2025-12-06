@@ -1,5 +1,6 @@
 package com.example.testingsystemback.enteties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,10 +16,12 @@ public class StudentTestEntity {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonIgnore
     private UsersEntity student;
 
     @ManyToOne
     @JoinColumn(name = "test_id", nullable = false)
+    @JsonIgnore
     private TestsEntity test;
 
     public StudentTestEntity() {}

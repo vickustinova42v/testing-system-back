@@ -1,5 +1,6 @@
 package com.example.testingsystemback.enteties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -17,9 +18,11 @@ public class SubjectsEntity {
 
     @ManyToOne
     @JoinColumn(name = "teacher_id", referencedColumnName = "id")
+    @JsonIgnore
     private UsersEntity teacher;
 
     @OneToMany(mappedBy = "subject")
+    @JsonIgnore
     private List<SubjectStudentEntity> students;
 
     public SubjectsEntity() {}
