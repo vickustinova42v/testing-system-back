@@ -1,10 +1,12 @@
 package com.example.testingsystemback.enteties;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class UsersEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,17 +31,24 @@ public class UsersEntity {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private RolesEntity role;
 
-    public UsersEntity() {
-    }
+    // Предметы, где пользователь является преподавателем
+    @OneToMany(mappedBy = "teacher")
+    private List<SubjectsEntity> subjectsAsTeacher;
+
+    // Предметы, где пользователь студент (через таблицу subject_student)
+    @OneToMany(mappedBy = "student")
+    private List<SubjectStudentEntity> subjectsAsStudent;
+
+    public UsersEntity() {}
 
     public UsersEntity(
-        Long id,
-        String lastName,
-        String firstName,
-        String fathersName,
-        String email,
-        String password,
-        RolesEntity role
+            Long id,
+            String lastName,
+            String firstName,
+            String fathersName,
+            String email,
+            String password,
+            RolesEntity role
     ) {
         this.id = id;
         this.lastName = lastName;
@@ -104,5 +113,21 @@ public class UsersEntity {
 
     public void setRole(RolesEntity role) {
         this.role = role;
+    }
+
+    public List<SubjectsEntity> getSubjectsAsTeacher() {
+        return subjectsAsTeacher;
+    }
+
+    public void setSubjectsAsTeacher(List<SubjectsEntity> subjectsAsTeacher) {
+        this.subjectsAsTeacher = subjectsAsTeacher;
+    }
+
+    public List<SubjectStudentEntity> getSubjectsAsStudent() {
+        return subjectsAsStudent;
+    }
+
+    public void setSubjectsAsStudent(List<SubjectStudentEntity> subjectsAsStudent) {
+        this.subjectsAsStudent = subjectsAsStudent;
     }
 }
