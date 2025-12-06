@@ -63,4 +63,11 @@ public class UsersService {
 
         return user.getRole().getName();
     }
+
+    public void deleteUser(Long id) {
+        if (!usersRepository.existsById(id)) {
+            throw new RuntimeException("Пользователь не найден");
+        }
+        usersRepository.deleteById(id);
+    }
 }

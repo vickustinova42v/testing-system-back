@@ -58,4 +58,10 @@ public class UsersController {
         return ResponseEntity.ok(result);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
+        usersService.deleteUser(id);
+        return ResponseEntity.ok("Пользователь удалён");
+    }
+
 }
