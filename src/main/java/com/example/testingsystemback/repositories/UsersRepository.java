@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
 
     Optional<UsersEntity> findByEmail(String email);
+    boolean existsByEmail(String email);
 
     // Получить пользователей по ID роли
     @Query("SELECT u FROM UsersEntity u WHERE u.role.id = :roleId")
