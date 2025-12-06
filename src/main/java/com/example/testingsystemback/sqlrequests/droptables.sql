@@ -1,3 +1,4 @@
+drop table subject_student;
 drop table student_test;
 drop table test_question;
 drop table answers;
