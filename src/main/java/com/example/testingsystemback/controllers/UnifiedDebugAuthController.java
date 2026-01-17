@@ -35,7 +35,6 @@ public class UnifiedDebugAuthController {
         String email = body.get("email");
         String rawPassword = body.get("password");
 
-        // 1. Проверяем пользователя в БД
         Optional<UsersEntity> userOpt = usersRepository.findByEmail(email);
         if (userOpt.isEmpty()) {
             return Map.of(
@@ -48,10 +47,8 @@ public class UnifiedDebugAuthController {
 
         UsersEntity user = userOpt.get();
 
-        // 2. Проверяем совпадение пароля
         boolean passwordMatches = passwordEncoder.matches(rawPassword, user.getPassword());
 
-        // 3. Пробуем authenticate()
         try {
             var token = new UsernamePasswordAuthenticationToken(email, rawPassword);
             var auth = authenticationManager.authenticate(token);

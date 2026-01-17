@@ -18,21 +18,16 @@ public class SubjectsController {
         this.subjectsService = subjectsService;
     }
 
-    // ---------- CRUD ДЛЯ ПРЕДМЕТОВ ----------
-
-    // Получить все предметы
     @GetMapping
     public List<SubjectsEntity> getAllSubjects() {
         return subjectsService.getAllSubjects();
     }
 
-    // Получить один предмет
     @GetMapping("/{id}")
     public SubjectsEntity getSubjectById(@PathVariable Long id) {
         return subjectsService.getSubjectById(id);
     }
 
-    // Создать предмет
     @PostMapping
     public SubjectsEntity createSubject(
             @RequestParam String name,
@@ -41,7 +36,6 @@ public class SubjectsController {
         return subjectsService.createSubject(name, teacherId);
     }
 
-    // Обновить предмет
     @PutMapping("/{id}")
     public SubjectsEntity updateSubject(
             @PathVariable Long id,
@@ -51,16 +45,12 @@ public class SubjectsController {
         return subjectsService.updateSubject(id, name, teacherId);
     }
 
-    // Удалить предмет
     @DeleteMapping("/{id}")
     public String deleteSubject(@PathVariable Long id) {
         subjectsService.deleteSubject(id);
         return "Предмет удалён";
     }
 
-    // ---------- СТУДЕНТЫ В ПРЕДМЕТЕ ----------
-
-    // Добавить студента в предмет
     @PostMapping("/{subjectId}/students/{studentId}")
     public String addStudent(
             @PathVariable Long subjectId,
@@ -70,7 +60,6 @@ public class SubjectsController {
         return "Студент добавлен";
     }
 
-    // Удалить студента из предмета
     @DeleteMapping("/{subjectId}/students/{studentId}")
     public String removeStudent(
             @PathVariable Long subjectId,
@@ -80,7 +69,6 @@ public class SubjectsController {
         return "Студент удалён";
     }
 
-    // Получить всех студентов предмета
     @GetMapping("/{subjectId}/students")
     public List<SubjectStudentEntity> getStudents(
             @PathVariable Long subjectId
