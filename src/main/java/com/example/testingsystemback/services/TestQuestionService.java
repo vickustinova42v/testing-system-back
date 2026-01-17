@@ -27,6 +27,7 @@ public class TestQuestionService implements ITestQuestionService {
         this.questionsRepository = questionsRepository;
     }
 
+    @Override
     public TestQuestionEntity addQuestionToTest(Long testId, Long questionId) {
         TestsEntity test = testsRepository.findById(testId)
                 .orElseThrow(() -> new RuntimeException("Test not found"));
@@ -41,6 +42,7 @@ public class TestQuestionService implements ITestQuestionService {
         return testQuestionRepository.save(tq);
     }
 
+    @Override
     public List<QuestionsEntity> getQuestionsByTest(Long testId) {
         return testQuestionRepository.findQuestionsByTestId(testId);
     }

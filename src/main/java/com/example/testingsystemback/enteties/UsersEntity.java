@@ -32,12 +32,10 @@ public class UsersEntity {
     @JoinColumn(name = "role_id", referencedColumnName = "id", nullable = false)
     private RolesEntity role;
 
-    // Предметы, где пользователь является преподавателем
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private List<SubjectsEntity> subjectsAsTeacher;
 
-    // Предметы, где пользователь студент (через таблицу subject_student)
     @OneToMany(mappedBy = "student")
     @JsonIgnore
     private List<SubjectStudentEntity> subjectsAsStudent;

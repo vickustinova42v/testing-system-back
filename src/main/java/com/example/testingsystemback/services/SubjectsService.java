@@ -29,18 +29,18 @@ public class SubjectsService implements ISubjectsService {
         this.subjectStudentRepository = subjectStudentRepository;
     }
 
-    // Получить все предметы
+    @Override
     public List<SubjectsEntity> getAllSubjects() {
         return subjectsRepository.findAll();
     }
 
-    // Получить предмет по id
+    @Override
     public SubjectsEntity getSubjectById(Long id) {
         return subjectsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
     }
 
-    // Создать предмет + сразу назначить преподавателя
+    @Override
     public SubjectsEntity createSubject(String name, Long teacherId) {
         UsersEntity teacher = usersRepository.findById(teacherId)
                 .orElseThrow(() -> new RuntimeException("Преподаватель не найден"));
@@ -52,7 +52,7 @@ public class SubjectsService implements ISubjectsService {
         return subjectsRepository.save(subject);
     }
 
-    // Обновить предмет (название + преподаватель)
+    @Override
     public SubjectsEntity updateSubject(Long id, String name, Long teacherId) {
         SubjectsEntity subject = subjectsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
@@ -68,22 +68,17 @@ public class SubjectsService implements ISubjectsService {
         return subjectsRepository.save(subject);
     }
 
-    // Удалить предмет
-    public void deleteSubject(Long id) {
+    @Override
+    public void delete(Long id) {
         SubjectsEntity subject = subjectsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
 
-        // удалить связи студент-предмет
-        List<SubjectStudentEntity> list =
-                subjectStudentRepository.findBySubject(subject);
-
+        List<SubjectStudentEntity> list = subjectStudentRepository.findBySubject(subject);
         subjectStudentRepository.deleteAll(list);
-
-        // удалить сам предмет
         subjectsRepository.delete(subject);
     }
 
-    // Добавить студента к предмету
+    @Override
     public void addStudentToSubject(Long subjectId, Long studentId) {
         SubjectsEntity subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
@@ -106,7 +101,7 @@ public class SubjectsService implements ISubjectsService {
         subjectStudentRepository.save(relation);
     }
 
-    // Удалить студента из предмета
+    @Override
     public void removeStudentFromSubject(Long subjectId, Long studentId) {
         SubjectsEntity subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
@@ -121,11 +116,18 @@ public class SubjectsService implements ISubjectsService {
         subjectStudentRepository.delete(relation);
     }
 
-    // Получить всех студентов предмета
+    @Override
     public List<SubjectStudentEntity> getStudentsOfSubject(Long subjectId) {
         SubjectsEntity subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Предмет не найден"));
 
         return subjectStudentRepository.findBySubject(subject);
+    }
+
+    @Override
+    public List<SubjectsEntity> getSubjectsByTeacher(Long teacherId) {
+        usersRepository.findById(teacherId)
+                .orElseThrow(() -> new RuntimeException("Преподаватель не найден"));
+        return subjectsRepository.findAllByTeacherId(teacherId);
     }
 }

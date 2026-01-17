@@ -25,14 +25,9 @@ public class TestEvaluationService implements ITestEvaluationService {
         this.answersRepository = answersRepository;
     }
 
-    /**
-     * @param testId ID теста
-     * @param studentAnswers Map<questionId, List<answerId>>
-     * @return итоговая оценка
-     */
+    @Override
     public int evaluateTest(Long testId, Map<Long, List<Long>> studentAnswers) {
 
-        // получаем все вопросы теста
         List<QuestionsEntity> testQuestions =
                 questionsRepository.findByTestId(testId);
 
@@ -57,7 +52,6 @@ public class TestEvaluationService implements ITestEvaluationService {
             }
         }
 
-        // оценка в процентах
         return (int) (((double) correct / testQuestions.size()) * 100);
     }
 }

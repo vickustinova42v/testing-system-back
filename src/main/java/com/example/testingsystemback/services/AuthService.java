@@ -35,6 +35,7 @@ public class AuthService implements IAuthService {
         this.authenticationManager = authenticationManager;
     }
 
+    @Override
     public UsersEntity register(UsersEntity user) {
 
         if (usersRepository.existsByEmail(user.getEmail())) {
@@ -50,6 +51,7 @@ public class AuthService implements IAuthService {
         return usersRepository.save(user);
     }
 
+    @Override
     public UsersEntity login(HttpServletRequest request, String email, String password) {
 
         Authentication auth = authenticationManager.authenticate(
@@ -65,6 +67,7 @@ public class AuthService implements IAuthService {
                 .orElseThrow(() -> new RuntimeException("User not found after login"));
     }
 
+    @Override
     public void logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session != null) session.invalidate();

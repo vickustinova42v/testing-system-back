@@ -47,7 +47,6 @@ public class StudentTestService implements IStudentTestService {
 
         int mark = testEvaluationService.evaluateTest(testId, studentAnswers);
 
-        // из-за UNIQUE(student_id, test_id) нужно обновлять запись, если она уже есть
         StudentTestEntity entity = studentTestRepository
                 .findByStudent_IdAndTest_Id(studentId, testId)
                 .orElseGet(() -> new StudentTestEntity(null, student, test));

@@ -15,11 +15,9 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
     Optional<UsersEntity> findByEmail(String email);
     boolean existsByEmail(String email);
 
-    // Получить пользователей по ID роли
     @Query("SELECT u FROM UsersEntity u WHERE u.role.id = :roleId")
     List<UsersEntity> findAllByRoleId(Long roleId);
 
-    // Получить студентов предмета
     @Query("""
         SELECT u 
         FROM UsersEntity u
@@ -28,7 +26,6 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
     """)
     List<UsersEntity> findStudentsBySubjectId(Long subjectId);
 
-    // Получить предметы, где студент участвует
     @Query("""
         SELECT ss.subject
         FROM UsersEntity u
@@ -37,7 +34,6 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
     """)
     List<SubjectsEntity> findSubjectsByStudentId(Long userId);
 
-    // Получить преподавателя предмета
     @Query("""
         SELECT s
         FROM SubjectsEntity s
@@ -45,7 +41,6 @@ public interface UsersRepository extends JpaRepository<UsersEntity, Long> {
     """)
     List<SubjectsEntity> findSubjectsByTeacherId(Long teacherId);
 
-    // Получение пользователя с ролью
     @Query("SELECT u FROM UsersEntity u JOIN FETCH u.role WHERE u.id = :id")
     Optional<UsersEntity> findByIdWithRole(Long id);
 }

@@ -22,6 +22,7 @@ public class TestsService implements ITestsService {
         this.subjectsRepository = subjectsRepository;
     }
 
+    @Override
     public TestsEntity createTest(Integer time, String name, Long subjectId) {
         SubjectsEntity subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
@@ -34,10 +35,12 @@ public class TestsService implements ITestsService {
         return testsRepository.save(test);
     }
 
+    @Override
     public List<TestsEntity> getTestsBySubject(Long subjectId) {
         return testsRepository.findAllBySubjectId(subjectId);
     }
 
+    @Override
     public void delete(Long id) {
         testsRepository.deleteById(id);
     }

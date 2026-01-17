@@ -1,7 +1,7 @@
 package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.UsersEntity;
-import com.example.testingsystemback.repositories.UsersRepository;
+import com.example.testingsystemback.interfaces.services.IUsersService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -9,23 +9,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/debug")
 public class UnifiedDebugAuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UsersRepository usersRepository;
+    private final IUsersService usersService;
     private final PasswordEncoder passwordEncoder;
 
     public UnifiedDebugAuthController(
             AuthenticationManager authenticationManager,
-            UsersRepository usersRepository,
+            IUsersService usersService,
             PasswordEncoder passwordEncoder
     ) {
         this.authenticationManager = authenticationManager;
-        this.usersRepository = usersRepository;
+        this.usersService = usersService;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -35,8 +34,10 @@ public class UnifiedDebugAuthController {
         String email = body.get("email");
         String rawPassword = body.get("password");
 
-        Optional<UsersEntity> userOpt = usersRepository.findByEmail(email);
-        if (userOpt.isEmpty()) {
+        UsersEntity user;
+        try {
+            user = usersService.getUserByEmail(email);
+        } catch (RuntimeException ex) {
             return Map.of(
                     "step", "DB lookup",
                     "ok", false,
@@ -44,8 +45,6 @@ public class UnifiedDebugAuthController {
                     "message", "Пользователь с таким email не найден"
             );
         }
-
-        UsersEntity user = userOpt.get();
 
         boolean passwordMatches = passwordEncoder.matches(rawPassword, user.getPassword());
 

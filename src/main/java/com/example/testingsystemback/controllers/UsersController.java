@@ -53,7 +53,7 @@ public class UsersController {
         result.put("lastName", user.getLastName());
         result.put("fathersName", user.getFathersName());
         result.put("email", user.getEmail());
-        result.put("role", user.getRole().getName()); // ← СТРОКА, как ты просила
+        result.put("role", user.getRole().getName());
 
         return ResponseEntity.ok(result);
     }

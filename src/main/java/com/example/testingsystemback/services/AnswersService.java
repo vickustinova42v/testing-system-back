@@ -22,22 +22,25 @@ public class AnswersService implements IAnswersService {
         this.questionsRepository = questionsRepository;
     }
 
-    public AnswersEntity createAnswer(String name, boolean isRight, Long questionId) {
+    @Override
+    public AnswersEntity createAnswer(String name, boolean isRightAnswer, Long questionId) {
         QuestionsEntity question = questionsRepository.findById(questionId)
                 .orElseThrow(() -> new RuntimeException("Question not found"));
 
         AnswersEntity ans = new AnswersEntity();
         ans.setName(name);
-        ans.setIsRightAnswer(isRight);
+        ans.setIsRightAnswer(isRightAnswer);
         ans.setQuestion(question);
 
         return answersRepository.save(ans);
     }
 
+    @Override
     public List<AnswersEntity> getAnswersByQuestion(Long questionId) {
         return answersRepository.findAllByQuestionId(questionId);
     }
 
+    @Override
     public void delete(Long id) {
         answersRepository.deleteById(id);
     }

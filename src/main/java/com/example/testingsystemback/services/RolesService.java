@@ -15,16 +15,19 @@ public class RolesService implements IRolesService {
         this.rolesRepository = rolesRepository;
     }
 
+    @Override
     public RolesEntity getRoleById(Long id) {
         return rolesRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Роль не найдена"));
     }
 
+    @Override
     public RolesEntity getRoleByName(String name) {
         return rolesRepository.findByName(name)
                 .orElseThrow(() -> new RuntimeException("Роль не найдена"));
     }
 
+    @Override
     public java.util.List<RolesEntity> getAllRoles() {
         return rolesRepository.findAll();
     }

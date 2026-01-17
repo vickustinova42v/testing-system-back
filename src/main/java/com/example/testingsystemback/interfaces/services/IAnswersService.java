@@ -5,7 +5,7 @@ import com.example.testingsystemback.enteties.AnswersEntity;
 import java.util.List;
 
 public interface IAnswersService {
-    AnswersEntity createAnswer(String name, Boolean isRightAnswer, Long questionId);
+    AnswersEntity createAnswer(String name, boolean isRightAnswer, Long questionId);
     List<AnswersEntity> getAnswersByQuestion(Long questionId);
     void delete(Long id);
 }

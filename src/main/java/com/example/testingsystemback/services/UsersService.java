@@ -21,10 +21,12 @@ public class UsersService implements IUsersService {
         this.rolesRepository = rolesRepository;
     }
 
+    @Override
     public List<UsersEntity> getAllUsers() {
         return usersRepository.findAll();
     }
 
+    @Override
     public UsersEntity updateUserData(Long id, UsersEntity newData) {
         UsersEntity user = usersRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
@@ -42,6 +44,7 @@ public class UsersService implements IUsersService {
         return usersRepository.save(user);
     }
 
+    @Override
     public UsersEntity changePassword(Long id, String oldPassword, String newPassword) {
         UsersEntity user = usersRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
@@ -54,18 +57,19 @@ public class UsersService implements IUsersService {
         return usersRepository.save(user);
     }
 
+    @Override
     public UsersEntity getUserById(Long id) {
         return usersRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
     }
 
-    public String getUserRoleName(Long id) {
-        UsersEntity user = usersRepository.findById(id)
+    @Override
+    public UsersEntity getUserByEmail(String email) {
+        return usersRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
-
-        return user.getRole().getName();
     }
 
+    @Override
     public void deleteUser(Long id) {
         if (!usersRepository.existsById(id)) {
             throw new RuntimeException("Пользователь не найден");

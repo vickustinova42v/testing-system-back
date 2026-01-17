@@ -1,8 +1,8 @@
 package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.UsersEntity;
-import com.example.testingsystemback.repositories.UsersRepository;
 import com.example.testingsystemback.interfaces.services.IAuthService;
+import com.example.testingsystemback.interfaces.services.IUsersService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,11 +16,11 @@ import java.util.Map;
 public class AuthController {
 
     private final IAuthService authService;
-    private final UsersRepository usersRepository;
+    private final IUsersService usersService;
 
-    public AuthController(IAuthService authService, UsersRepository usersRepository) {
+    public AuthController(IAuthService authService, IUsersService usersService) {
         this.authService = authService;
-        this.usersRepository = usersRepository;
+        this.usersService = usersService;
     }
 
     @PostMapping("/register")
@@ -29,10 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(
-            @RequestBody UsersEntity user,
-            HttpServletRequest request
-    ) {
+    public ResponseEntity<?> login(@RequestBody UsersEntity user, HttpServletRequest request) {
         UsersEntity u = authService.login(request, user.getEmail(), user.getPassword());
         return ResponseEntity.ok(Map.of(
                 "id", u.getId(),
@@ -45,15 +42,13 @@ public class AuthController {
 
     @GetMapping("/me")
     public ResponseEntity<?> me() {
-
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-        if (auth == null || !auth.isAuthenticated() || auth.getPrincipal().equals("anonymousUser")) {
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
             return ResponseEntity.status(401).body("Not authenticated");
         }
 
         String email = auth.getName();
-        UsersEntity user = usersRepository.findByEmail(email).get();
+        UsersEntity user = usersService.getUserByEmail(email);
 
         return ResponseEntity.ok(Map.of(
                 "id", user.getId(),
@@ -70,4 +65,3 @@ public class AuthController {
         return ResponseEntity.ok("Logged out");
     }
 }
-

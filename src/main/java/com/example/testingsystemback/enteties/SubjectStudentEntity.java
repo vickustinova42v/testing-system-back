@@ -3,7 +3,10 @@ package com.example.testingsystemback.enteties;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "subject_student")
+@Table(
+        name = "subject_student",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"subject_id", "student_id"})
+)
 public class SubjectStudentEntity {
 
     @Id

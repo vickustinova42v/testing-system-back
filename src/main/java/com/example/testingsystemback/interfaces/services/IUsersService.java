@@ -5,8 +5,10 @@ import com.example.testingsystemback.enteties.UsersEntity;
 import java.util.List;
 
 public interface IUsersService {
-    UsersEntity createUser(String lastName, String firstName, String fathersName, String email, String password, Long roleId);
     List<UsersEntity> getAllUsers();
+    UsersEntity updateUserData(Long id, UsersEntity newData);
+    UsersEntity changePassword(Long id, String oldPassword, String newPassword);
     UsersEntity getUserById(Long id);
-    void delete(Long id);
+    UsersEntity getUserByEmail(String email);
+    void deleteUser(Long id);
 }

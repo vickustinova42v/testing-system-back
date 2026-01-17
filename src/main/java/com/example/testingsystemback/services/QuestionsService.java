@@ -22,6 +22,7 @@ public class QuestionsService implements IQuestionsService {
         this.subjectsRepository = subjectsRepository;
     }
 
+    @Override
     public QuestionsEntity createQuestion(String type, String name, Long subjectId) {
         SubjectsEntity subject = subjectsRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
@@ -39,10 +40,12 @@ public class QuestionsService implements IQuestionsService {
         return questionsRepository.save(q);
     }
 
+    @Override
     public List<QuestionsEntity> getQuestionsBySubject(Long subjectId) {
         return questionsRepository.findAllBySubjectId(subjectId);
     }
 
+    @Override
     public void delete(Long id) {
         questionsRepository.deleteById(id);
     }

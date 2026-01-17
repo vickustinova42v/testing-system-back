@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "student_test")
+@Table(
+        name = "student_test",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"student_id", "test_id"})
+)
 public class StudentTestEntity {
 
     @Id
