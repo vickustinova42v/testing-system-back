@@ -1,11 +1,13 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.IRolesService;
+
 import com.example.testingsystemback.enteties.RolesEntity;
 import com.example.testingsystemback.repositories.RolesRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RolesService {
+public class RolesService implements IRolesService {
 
     private final RolesRepository rolesRepository;
 

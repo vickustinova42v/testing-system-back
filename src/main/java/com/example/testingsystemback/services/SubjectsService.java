@@ -1,5 +1,7 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.ISubjectsService;
+
 import com.example.testingsystemback.enteties.SubjectsEntity;
 import com.example.testingsystemback.enteties.SubjectStudentEntity;
 import com.example.testingsystemback.enteties.UsersEntity;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class SubjectsService {
+public class SubjectsService implements ISubjectsService {
 
     private final SubjectsRepository subjectsRepository;
     private final UsersRepository usersRepository;

@@ -1,5 +1,7 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.IUsersService;
+
 import com.example.testingsystemback.enteties.RolesEntity;
 import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.UsersRepository;
@@ -9,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class UsersService {
+public class UsersService implements IUsersService {
 
     private final UsersRepository usersRepository;
     private final RolesRepository rolesRepository;

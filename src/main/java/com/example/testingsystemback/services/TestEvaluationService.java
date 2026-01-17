@@ -1,5 +1,7 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.ITestEvaluationService;
+
 import com.example.testingsystemback.enteties.AnswersEntity;
 import com.example.testingsystemback.enteties.QuestionsEntity;
 import com.example.testingsystemback.repositories.AnswersRepository;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class TestEvaluationService {
+public class TestEvaluationService implements ITestEvaluationService {
 
     private final QuestionsRepository questionsRepository;
     private final AnswersRepository answersRepository;

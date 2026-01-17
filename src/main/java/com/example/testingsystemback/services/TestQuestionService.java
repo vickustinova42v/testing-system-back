@@ -1,5 +1,7 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.ITestQuestionService;
+
 import com.example.testingsystemback.enteties.TestQuestionEntity;
 import com.example.testingsystemback.enteties.TestsEntity;
 import com.example.testingsystemback.enteties.QuestionsEntity;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TestQuestionService {
+public class TestQuestionService implements ITestQuestionService {
 
     private final TestQuestionRepository testQuestionRepository;
     private final TestsRepository testsRepository;

@@ -11,7 +11,7 @@ public class StudentTestEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mark", nullable = false)
+    @Column(name = "mark")
     private Integer mark;
 
     @ManyToOne

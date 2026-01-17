@@ -2,7 +2,7 @@ package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.UsersRepository;
-import com.example.testingsystemback.services.AuthService;
+import com.example.testingsystemback.interfaces.services.IAuthService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -15,10 +15,10 @@ import java.util.Map;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthService authService;
+    private final IAuthService authService;
     private final UsersRepository usersRepository;
 
-    public AuthController(AuthService authService, UsersRepository usersRepository) {
+    public AuthController(IAuthService authService, UsersRepository usersRepository) {
         this.authService = authService;
         this.usersRepository = usersRepository;
     }

@@ -1,5 +1,7 @@
 package com.example.testingsystemback.services;
 
+import com.example.testingsystemback.interfaces.services.IAuthService;
+
 import com.example.testingsystemback.enteties.RolesEntity;
 import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.RolesRepository;
@@ -14,7 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class AuthService {
+public class AuthService implements IAuthService {
 
     private final UsersRepository usersRepository;
     private final RolesRepository rolesRepository;

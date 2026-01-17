@@ -2,7 +2,7 @@ package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.QuestionsEntity;
 import com.example.testingsystemback.enteties.TestQuestionEntity;
-import com.example.testingsystemback.services.TestQuestionService;
+import com.example.testingsystemback.interfaces.services.ITestQuestionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
 @RequestMapping("/test-questions")
 public class TestQuestionController {
 
-    private final TestQuestionService testQuestionService;
+    private final ITestQuestionService testQuestionService;
 
-    public TestQuestionController(TestQuestionService testQuestionService) {
+    public TestQuestionController(ITestQuestionService testQuestionService) {
         this.testQuestionService = testQuestionService;
     }
 

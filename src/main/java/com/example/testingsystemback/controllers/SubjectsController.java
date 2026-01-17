@@ -2,7 +2,7 @@ package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.SubjectsEntity;
 import com.example.testingsystemback.enteties.SubjectStudentEntity;
-import com.example.testingsystemback.services.SubjectsService;
+import com.example.testingsystemback.interfaces.services.ISubjectsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.List;
 @CrossOrigin("*")
 public class SubjectsController {
 
-    private final SubjectsService subjectsService;
+    private final ISubjectsService subjectsService;
 
-    public SubjectsController(SubjectsService subjectsService) {
+    public SubjectsController(ISubjectsService subjectsService) {
         this.subjectsService = subjectsService;
     }
 

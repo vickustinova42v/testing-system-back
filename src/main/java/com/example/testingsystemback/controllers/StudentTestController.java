@@ -1,7 +1,7 @@
 package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.StudentTestEntity;
-import com.example.testingsystemback.services.StudentTestService;
+import com.example.testingsystemback.interfaces.services.IStudentTestService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Map;
 @RequestMapping("/student-test")
 public class StudentTestController {
 
-    private final StudentTestService studentTestService;
+    private final IStudentTestService studentTestService;
 
-    public StudentTestController(StudentTestService studentTestService) {
+    public StudentTestController(IStudentTestService studentTestService) {
         this.studentTestService = studentTestService;
     }
 

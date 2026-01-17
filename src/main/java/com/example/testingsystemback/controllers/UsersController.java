@@ -1,7 +1,7 @@
 package com.example.testingsystemback.controllers;
 
 import com.example.testingsystemback.enteties.UsersEntity;
-import com.example.testingsystemback.services.UsersService;
+import com.example.testingsystemback.interfaces.services.IUsersService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +13,9 @@ import java.util.Map;
 @RequestMapping("/users")
 public class UsersController {
 
-    private final UsersService usersService;
+    private final IUsersService usersService;
 
-    public UsersController(UsersService usersService) {
+    public UsersController(IUsersService usersService) {
         this.usersService = usersService;
     }
 
