@@ -8,6 +8,10 @@ import com.example.testingsystemback.enteties.UsersEntity;
 import com.example.testingsystemback.repositories.SubjectsRepository;
 import com.example.testingsystemback.repositories.SubjectStudentRepository;
 import com.example.testingsystemback.repositories.UsersRepository;
+import com.example.testingsystemback.repositories.TestsRepository;
+import com.example.testingsystemback.repositories.StudentTestRepository;
+import com.example.testingsystemback.enteties.TestsEntity;
+import com.example.testingsystemback.enteties.StudentTestEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,15 +22,21 @@ public class SubjectsService implements ISubjectsService {
     private final SubjectsRepository subjectsRepository;
     private final UsersRepository usersRepository;
     private final SubjectStudentRepository subjectStudentRepository;
+    private final TestsRepository testsRepository;
+    private final StudentTestRepository studentTestRepository;
 
     public SubjectsService(
             SubjectsRepository subjectsRepository,
             UsersRepository usersRepository,
-            SubjectStudentRepository subjectStudentRepository
+            SubjectStudentRepository subjectStudentRepository,
+            TestsRepository testsRepository,
+            StudentTestRepository studentTestRepository
     ) {
         this.subjectsRepository = subjectsRepository;
         this.usersRepository = usersRepository;
         this.subjectStudentRepository = subjectStudentRepository;
+        this.testsRepository = testsRepository;
+        this.studentTestRepository = studentTestRepository;
     }
 
     @Override
@@ -99,6 +109,12 @@ public class SubjectsService implements ISubjectsService {
         relation.setStudent(student);
 
         subjectStudentRepository.save(relation);
+
+        List<TestsEntity> tests = testsRepository.findAllBySubjectId(subjectId);
+        for (TestsEntity test : tests) {
+            studentTestRepository.findByStudent_IdAndTest_Id(studentId, test.getId())
+                    .orElseGet(() -> studentTestRepository.save(new StudentTestEntity(null, student, test)));
+        }
     }
 
     @Override
@@ -129,5 +145,12 @@ public class SubjectsService implements ISubjectsService {
         usersRepository.findById(teacherId)
                 .orElseThrow(() -> new RuntimeException("Преподаватель не найден"));
         return subjectsRepository.findAllByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<SubjectsEntity> getSubjectsByStudent(Long studentId) {
+        usersRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Студент не найден"));
+        return subjectsRepository.findAllByStudentId(studentId);
     }
 }

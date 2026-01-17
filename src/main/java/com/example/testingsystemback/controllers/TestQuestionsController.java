@@ -8,23 +8,25 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/test-questions")
-public class TestQuestionController {
+@RequestMapping("/api/tests")
+public class TestQuestionsController {
 
     private final ITestQuestionService testQuestionService;
 
-    public TestQuestionController(ITestQuestionService testQuestionService) {
+    public TestQuestionsController(ITestQuestionService testQuestionService) {
         this.testQuestionService = testQuestionService;
     }
 
-    @PostMapping
-    public TestQuestionEntity addQuestion(@RequestParam Long testId,
-                                          @RequestParam Long questionId) {
+    @PostMapping("/{testId}/questions/{questionId}")
+    public TestQuestionEntity addQuestion(
+            @PathVariable Long testId,
+            @PathVariable Long questionId
+    ) {
         return testQuestionService.addQuestionToTest(testId, questionId);
     }
 
-    @GetMapping("/test/{id}")
-    public List<QuestionsEntity> getQuestions(@PathVariable Long id) {
-        return testQuestionService.getQuestionsByTest(id);
+    @GetMapping("/{testId}/questions")
+    public List<QuestionsEntity> getQuestions(@PathVariable Long testId) {
+        return testQuestionService.getQuestionsByTest(testId);
     }
 }

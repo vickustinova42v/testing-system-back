@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface IStudentTestService {
     StudentTestEntity submitTest(Long studentId, Long testId, Map<Long, List<Long>> studentAnswers);
+
+    List<StudentTestEntity> getStudentTests(Long studentId);
 }

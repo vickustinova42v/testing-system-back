@@ -19,4 +19,6 @@ public interface ISubjectsService {
     List<SubjectStudentEntity> getStudentsOfSubject(Long subjectId);
 
     List<SubjectsEntity> getSubjectsByTeacher(Long teacherId);
+
+    List<SubjectsEntity> getSubjectsByStudent(Long studentId);
 }

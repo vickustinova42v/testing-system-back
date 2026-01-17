@@ -57,4 +57,11 @@ public class StudentTestService implements IStudentTestService {
 
         return studentTestRepository.save(entity);
     }
+
+    @Override
+    public List<StudentTestEntity> getStudentTests(Long studentId) {
+        usersRepository.findById(studentId)
+                .orElseThrow(() -> new RuntimeException("Студент не найден"));
+        return studentTestRepository.findAllByStudent_Id(studentId);
+    }
 }

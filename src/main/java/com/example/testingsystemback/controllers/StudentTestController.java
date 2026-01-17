@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/student-test")
+@RequestMapping("/api/student-tests")
 public class StudentTestController {
 
     private final IStudentTestService studentTestService;
@@ -24,5 +24,10 @@ public class StudentTestController {
             @RequestBody Map<Long, List<Long>> studentAnswers
     ) {
         return studentTestService.submitTest(studentId, testId, studentAnswers);
+    }
+
+    @GetMapping("/student/{studentId}")
+    public List<StudentTestEntity> getStudentTests(@PathVariable Long studentId) {
+        return studentTestService.getStudentTests(studentId);
     }
 }

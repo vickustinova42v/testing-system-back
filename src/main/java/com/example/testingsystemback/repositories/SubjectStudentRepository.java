@@ -12,5 +12,7 @@ public interface SubjectStudentRepository extends JpaRepository<SubjectStudentEn
 
     List<SubjectStudentEntity> findBySubject(SubjectsEntity subject);
 
+    List<SubjectStudentEntity> findByStudent(UsersEntity student);
+
     Optional<SubjectStudentEntity> findBySubjectAndStudent(SubjectsEntity subject, UsersEntity student);
 }

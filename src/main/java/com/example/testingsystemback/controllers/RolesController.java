@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/roles")
+@RequestMapping("/api/roles")
 public class RolesController {
 
     private final IRolesService rolesService;
@@ -17,18 +17,8 @@ public class RolesController {
         this.rolesService = rolesService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RolesEntity> getRoleById(@PathVariable Long id) {
-        return ResponseEntity.ok(rolesService.getRoleById(id));
-    }
-
     @GetMapping
     public ResponseEntity<List<RolesEntity>> getAllRoles() {
         return ResponseEntity.ok(rolesService.getAllRoles());
-    }
-
-    @GetMapping("/name/{name}")
-    public ResponseEntity<RolesEntity> getRoleByName(@PathVariable String name) {
-        return ResponseEntity.ok(rolesService.getRoleByName(name));
     }
 }

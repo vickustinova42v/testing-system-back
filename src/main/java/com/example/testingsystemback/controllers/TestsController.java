@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tests")
+@RequestMapping("/api/tests")
 public class TestsController {
 
     private final ITestsService testsService;
@@ -17,15 +17,32 @@ public class TestsController {
     }
 
     @PostMapping
-    public TestsEntity create(@RequestParam Integer time,
-                              @RequestParam String name,
-                              @RequestParam Long subjectId) {
+    public TestsEntity create(
+            @RequestParam Integer time,
+            @RequestParam String name,
+            @RequestParam Long subjectId
+    ) {
         return testsService.createTest(time, name, subjectId);
     }
 
-    @GetMapping("/subject/{id}")
-    public List<TestsEntity> getBySubject(@PathVariable Long id) {
-        return testsService.getTestsBySubject(id);
+    @PutMapping("/{id}")
+    public TestsEntity update(
+            @PathVariable Long id,
+            @RequestParam(required = false) Integer time,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long subjectId
+    ) {
+        return testsService.updateTest(id, time, name, subjectId);
+    }
+
+    @GetMapping("/{id}")
+    public TestsEntity getById(@PathVariable Long id) {
+        return testsService.getTestById(id);
+    }
+
+    @GetMapping("/subject/{subjectId}")
+    public List<TestsEntity> getBySubject(@PathVariable Long subjectId) {
+        return testsService.getTestsBySubject(subjectId);
     }
 
     @DeleteMapping("/{id}")

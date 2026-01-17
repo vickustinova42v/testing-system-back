@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subjects")
+@RequestMapping("/api/subjects")
 @CrossOrigin("*")
 public class SubjectsController {
 
@@ -21,6 +21,16 @@ public class SubjectsController {
     @GetMapping
     public List<SubjectsEntity> getAllSubjects() {
         return subjectsService.getAllSubjects();
+    }
+
+    @GetMapping("/teacher/{teacherId}")
+    public List<SubjectsEntity> getSubjectsByTeacher(@PathVariable Long teacherId) {
+        return subjectsService.getSubjectsByTeacher(teacherId);
+    }
+
+    @GetMapping("/student/{studentId}")
+    public List<SubjectsEntity> getSubjectsByStudent(@PathVariable Long studentId) {
+        return subjectsService.getSubjectsByStudent(studentId);
     }
 
     @GetMapping("/{id}")

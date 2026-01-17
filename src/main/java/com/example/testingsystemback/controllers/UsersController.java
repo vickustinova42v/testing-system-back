@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UsersController {
 
     private final IUsersService usersService;
@@ -31,16 +31,6 @@ public class UsersController {
     ) {
         UsersEntity updated = usersService.updateUserData(id, userData);
         return ResponseEntity.ok(updated);
-    }
-
-    @PutMapping("/{id}/password")
-    public ResponseEntity<String> changePassword(
-            @PathVariable Long id,
-            @RequestParam String oldPassword,
-            @RequestParam String newPassword
-    ) {
-        usersService.changePassword(id, oldPassword, newPassword);
-        return ResponseEntity.ok("Пароль успешно изменён");
     }
 
     @GetMapping("/{id}")
